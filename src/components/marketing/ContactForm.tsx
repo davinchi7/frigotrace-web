@@ -2,11 +2,11 @@
 
 import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
+import { actionContactForm } from "@/app/marketing-actions";
 import {
-  actionContactForm,
   CONTACT_FORM_FALLBACK_EMAIL,
   type ContactFormState,
-} from "@/app/marketing-actions";
+} from "@/lib/contact-form-action";
 import {
   CONTACT_FIELD_LIMITS,
   CONTACT_MOTIVO_OPTIONS,
