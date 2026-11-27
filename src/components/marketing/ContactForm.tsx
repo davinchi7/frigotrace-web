@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { actionContactForm, type ContactFormState } from "@/app/marketing-actions";
 import {
   CONTACT_FIELD_LIMITS,
@@ -68,18 +67,7 @@ function SelectField({
   );
 }
 
-function resolveMotivoFromSearch(motivoParam: string | null): string {
-  if (motivoParam === "demo") return "Ver una demo";
-  if (motivoParam === "otra") return "Otra consulta";
-  return CONTACT_MOTIVO_OPTIONS[0];
-}
-
-export function ContactForm() {
-  const searchParams = useSearchParams();
-  const motivoDefault = useMemo(
-    () => resolveMotivoFromSearch(searchParams.get("motivo")),
-  [searchParams]
-  );
+export function ContactForm({ motivoDefault }: { motivoDefault: string }) {
 
   const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(
     actionContactForm,

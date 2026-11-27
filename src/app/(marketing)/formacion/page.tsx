@@ -1,17 +1,27 @@
 import Link from "next/link";
 import { buildPublicMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
-export const metadata = buildPublicMetadata({
-  title: "Formación RD 1066/2026",
-  description:
-    "Marco del Real Decreto 1066/2026 sobre gases fluorados de efecto invernadero: registro, fugas, ventas y certificados.",
-  path: "formacion",
-});
+export async function generateMetadata() {
+  return buildPublicMetadata({
+    title: "Formación RD 1066/2026",
+    description:
+      "Marco del Real Decreto 1066/2026 sobre gases fluorados de efecto invernadero: registro, fugas, ventas y certificados.",
+    path: "formacion",
+  });
+}
 
 export default function FormacionPage() {
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 prose prose-slate">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Inicio", path: "" },
+          { name: "Formación", path: "formacion" },
+        ])}
+      />
       <h1>Formación: RD 1066/2026 — gases fluorados</h1>
       <p className="lead">
         El Real Decreto 1066/2026 desarrolla en España el registro y control de gases fluorados de efecto invernadero en

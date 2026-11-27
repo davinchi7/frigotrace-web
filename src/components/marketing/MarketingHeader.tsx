@@ -73,7 +73,12 @@ export function MarketingHeader() {
           <Link href="/contacto" className="min-h-11 flex items-center rounded-lg px-2 hover:bg-ft-ice" onClick={() => setOpen(false)}>
             Solicitar demo
           </Link>
-          <a href={appUrl} className="min-h-11 flex items-center rounded-lg px-2 text-[#0A7F85] font-semibold">
+          <a
+            href={appUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-11 flex items-center rounded-lg px-2 text-[#0A7F85] font-semibold"
+          >
             Acceder a la app
           </a>
         </nav>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { LEGAL_ENTITY } from "@/lib/legal-entity";
 
+export const OG_IMAGE_PATH = "/og.png";
+
 function envTruthy(raw: string | undefined): boolean {
   const v = raw?.trim().toLowerCase();
   return v === "true" || v === "1" || v === "yes";
@@ -40,6 +42,16 @@ export const PUBLIC_PATHS = [
   "terminos",
 ] as const;
 
+export function pageAlternateLanguages(canonical: string): NonNullable<Metadata["alternates"]> {
+  return {
+    canonical,
+    languages: {
+      es: canonical,
+      "x-default": canonical,
+    },
+  };
+}
+
 export function buildPublicMetadata({
   title,
   description,
@@ -53,11 +65,12 @@ export function buildPublicMetadata({
   const url = path ? `${base}/${path.replace(/^\//, "")}` : base;
   const product = LEGAL_ENTITY.productName;
   const verification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+  const ogImage = { url: OG_IMAGE_PATH, width: 1200, height: 630, alt: product };
 
   const meta: Metadata = {
     title,
     description,
-    alternates: { canonical: url, languages: { "es-ES": url } },
+    alternates: pageAlternateLanguages(url),
     openGraph: {
       type: "website",
       locale: "es_ES",
@@ -65,13 +78,13 @@ export function buildPublicMetadata({
       title,
       description,
       siteName: product,
-      images: [{ url: `${base}/brand/png/frigotrace-horizontal-1200.png`, width: 1200, height: 400, alt: product }],
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`${base}/brand/png/frigotrace-horizontal-1200.png`],
+      images: [OG_IMAGE_PATH],
     },
     robots: isSeoIndexable() ? { index: true, follow: true } : { index: false, follow: false },
   };

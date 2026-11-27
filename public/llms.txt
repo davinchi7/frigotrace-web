@@ -1,0 +1,37 @@
+# FrigoTrace
+
+> Software en la nube de DAVINCHI para el libro de registro digital de gases fluorados en instalaciones frigoríficas, conforme al Real Decreto 1066/2026.
+
+## Resumen
+
+FrigoTrace centraliza equipos y cargas de gas, registro de fugas, ventas de gases fluorados, certificados del personal e informes del sistema equivalente digital (Anexo V). Dirigido a empresas instaladoras y de mantenimiento, distribuidores de refrigeración, responsables de instalación y gestorías.
+
+## Módulos (sitio público)
+
+- Equipos y carga de gas (art. 10 y 15.3 RD 1066/2026)
+- Registro de fugas (art. 15.1)
+- Ventas con verificación (arts. 10 y 15.3)
+- Certificados del personal (art. 6.6)
+- Informe Anexo V (art. 11.2)
+- Cuadros de mando e indicadores (datos de ejemplo en capturas)
+
+## Límites importantes
+
+- No envía datos al registro del MITECO hasta que esté operativo (art. 13 y DT 5.ª); la información del sitio es orientativa.
+- El cumplimiento normativo es responsabilidad del operador.
+- Precios a medida: no hay tarifas públicas en la web; solicitar condiciones en contacto.
+
+## Páginas
+
+- https://frigotrace.es/
+- https://frigotrace.es/contacto
+- https://frigotrace.es/preguntas-frecuentes
+- https://frigotrace.es/formacion
+- https://frigotrace.es/aviso-legal
+- https://frigotrace.es/privacidad
+- https://frigotrace.es/cookies
+- https://frigotrace.es/terminos
+
+## Contacto
+
+- frigotrace@davinchi.es

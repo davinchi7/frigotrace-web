@@ -42,7 +42,7 @@ npm run start   # puerto 3300
 
 - `GET /api/health` — JSON `{ ok: true, ... }`.
 - Formulario en `/contacto` con credenciales API válidas.
-- `robots.txt` y `sitemap.xml` solo útiles con `SEO_INDEXABLE=true`.
+- `robots.txt` y `sitemap.xml` se generan en **runtime** (`force-dynamic`); requieren `SEO_INDEXABLE=true` en el `.env` del contenedor (no en build).
 
 ## CI
 
