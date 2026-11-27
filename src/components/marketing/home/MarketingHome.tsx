@@ -3,12 +3,14 @@ import {
   HOME_FAQ,
   HOME_HERO,
   AUDIENCES,
-  FEATURE_BLOCKS,
+  FEATURE_SHOWCASES,
   HOW_IT_WORKS,
   PRICING,
   REGULATORY_STRIP,
+  STATS_SCREEN,
 } from "@/lib/marketing-home-content";
-import { MarketingMockup } from "@/components/marketing/mockups/MarketingMockup";
+import { BrowserScreenshot } from "@/components/marketing/screens/BrowserScreenshot";
+import { FeatureShowcaseRow } from "@/components/marketing/screens/FeatureShowcaseRow";
 import { Button } from "@/components/ui/button";
 import { getAppUrl } from "@/lib/app-url";
 
@@ -18,8 +20,8 @@ export function MarketingHome() {
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-br from-[#12343B] via-[#04606F] to-[#0A7F85] text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-12">
-          <div>
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:py-16">
+          <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-wider text-[#F8A112]">{HOME_HERO.kicker}</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{HOME_HERO.title}</h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-100">{HOME_HERO.subtitle}</p>
@@ -49,8 +51,14 @@ export function MarketingHome() {
               </Button>
             </div>
           </div>
-          <div className="relative">
-            <MarketingMockup view="equipos" className="shadow-2xl shadow-black/25" />
+          <div className="mt-12">
+            <BrowserScreenshot
+              slug={HOME_HERO.heroScreen}
+              alt="Panel principal de FrigoTrace con indicadores de cumplimiento"
+              priority
+              sizes="(max-width: 1280px) 100vw, 1152px"
+              className="shadow-2xl shadow-black/30"
+            />
           </div>
         </div>
       </section>
@@ -58,63 +66,47 @@ export function MarketingHome() {
       <section id="funcionalidades" className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
         <h2 className="text-3xl font-bold text-ft-ink">Todo el libro de registro, en un solo software</h2>
         <p className="mt-3 max-w-3xl text-slate-600">
-          Módulos alineados con el RD 1066/2026: equipos, fugas, ventas, certificados e informes. Cada bloque cita el
-          artículo aplicable.
+          Módulos alineados con el RD 1066/2026. Capturas reales de la interfaz con datos de ejemplo.
         </p>
-        <ul className="mt-12 grid gap-8 md:grid-cols-2">
-          {FEATURE_BLOCKS.map((f) => (
-            <li key={f.title} className="grid gap-4 sm:grid-cols-2 sm:items-start">
-              <MarketingMockup view={f.mock} />
-              <div>
-                <h3 className="text-lg font-semibold text-ft-ink">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{f.text}</p>
-              </div>
-            </li>
+        <div className="mt-14 flex flex-col gap-20 sm:gap-24">
+          {FEATURE_SHOWCASES.map((block) => (
+            <FeatureShowcaseRow key={block.slug} block={block} />
           ))}
-        </ul>
+        </div>
       </section>
 
-      <section id="estadisticas" className="border-y border-slate-200 bg-ft-ice/50 py-16">
+      <section id="estadisticas" className="border-y border-slate-200 bg-ft-ice/50 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold text-ft-ink">Indicadores para decidir con datos</h2>
           <p className="mt-3 max-w-2xl text-slate-600">
-            Visualiza t CO₂e por instalación, evolución de fugas y alertas de certificados. Los valores mostrados en la
-            web son <strong className="font-semibold text-slate-800">datos de ejemplo</strong>.
+            El panel central resume t CO₂e, fugas y certificados. Cifras de las capturas:{" "}
+            <strong className="font-semibold text-slate-800">datos de ejemplo</strong>.
           </p>
-          <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-            <MarketingMockup view="dashboard" />
-            <dl className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <dt className="text-xs font-medium uppercase text-slate-500">CO₂e instalación C (ejemplo)</dt>
-                <dd className="mt-1 text-2xl font-bold text-[#04606F]">4,8 t</dd>
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <dt className="text-xs font-medium uppercase text-slate-500">Fugas últimos 12 meses (ejemplo)</dt>
-                <dd className="mt-1 text-2xl font-bold text-[#04606F]">6</dd>
-              </div>
-              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                <dt className="text-xs font-medium uppercase text-amber-900/80">Certificados &lt; 90 días (ejemplo)</dt>
-                <dd className="mt-1 text-2xl font-bold text-amber-900">2</dd>
-              </div>
-            </dl>
+          <div className="mt-10">
+            <BrowserScreenshot
+              slug={STATS_SCREEN}
+              alt="Panel con gráficos de CO2 equivalente y fugas"
+              sizes="(max-width: 1280px) 100vw, 1152px"
+            />
           </div>
         </div>
       </section>
 
       <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
         <h2 className="text-3xl font-bold text-ft-ink">Así trabajas con FrigoTrace</h2>
-        <ol className="mt-12 space-y-16">
-          {HOW_IT_WORKS.map((step, index) => (
-            <li
-              key={step.step}
-              className={`grid gap-8 lg:grid-cols-2 lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
-            >
-              <MarketingMockup view={step.mock} />
-              <div>
-                <p className="text-sm font-bold text-[#0A7F85]">Paso {step.step}</p>
-                <h3 className="mt-1 text-2xl font-semibold">{step.title}</h3>
-                <p className="mt-3 text-slate-600 leading-relaxed">{step.text}</p>
-              </div>
+        <ol className="mt-14 flex list-none flex-col gap-20 sm:gap-24">
+          {HOW_IT_WORKS.map((step) => (
+            <li key={step.step}>
+              <article className="grid gap-8 lg:grid-cols-5 lg:items-center lg:gap-10">
+                <div className={cnColImage(step.imageOnRight)}>
+                  <BrowserScreenshot slug={step.slug} alt={step.alt} sizes="(max-width: 1024px) 100vw, 60vw" />
+                </div>
+                <div className={cnColText(step.imageOnRight)}>
+                  <p className="text-sm font-bold text-[#0A7F85]">Paso {step.step}</p>
+                  <h3 className="mt-1 text-2xl font-semibold text-ft-ink">{step.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600">{step.text}</p>
+                </div>
+              </article>
             </li>
           ))}
         </ol>
@@ -171,7 +163,7 @@ export function MarketingHome() {
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="text-3xl font-bold text-ft-ink">Solicita demo o condiciones</h2>
           <p className="mx-auto mt-3 max-w-xl text-slate-600">
-            Formulario con ApiTools (misma integración que otras webs DAVINCHI). Te respondemos desde frigotrace@davinchi.es.
+            Formulario con ApiTools. Respuesta desde frigotrace@davinchi.es.
           </p>
           <Button asChild size="lg" className="mt-8 min-h-11">
             <Link href="/contacto">Ir al formulario de contacto</Link>
@@ -202,4 +194,12 @@ function RegulatoryBanner() {
       </div>
     </>
   );
+}
+
+function cnColImage(imageOnRight?: boolean) {
+  return imageOnRight ? "lg:col-span-3 lg:order-2" : "lg:col-span-3";
+}
+
+function cnColText(imageOnRight?: boolean) {
+  return imageOnRight ? "lg:col-span-2 lg:order-1" : "lg:col-span-2";
 }

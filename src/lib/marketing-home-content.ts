@@ -1,64 +1,137 @@
+import type { ScreenSlug } from "@/lib/marketing-screens";
+
 export const HOME_HERO = {
   kicker: "Registro digital de gases fluorados",
   title: "Software de libro de registro y trazabilidad para instalaciones frigoríficas",
   subtitle:
     "Centraliza equipos, cargas de gas, fugas, ventas, certificados del personal e informes del sistema equivalente digital conforme al Real Decreto 1066/2026.",
   badges: ["RD 1066/2026", "CO₂e por instalación", "Libro de registro digital", "Anexo V — art. 11.2"],
+  heroScreen: "01-panel" as const satisfies ScreenSlug,
 } as const;
 
-export const FEATURE_BLOCKS = [
+export type FeatureShowcase = {
+  title: string;
+  text: string;
+  slug: ScreenSlug;
+  alt: string;
+  imageOnRight?: boolean;
+  futureNotice?: string;
+};
+
+export const FEATURE_SHOWCASES: FeatureShowcase[] = [
   {
-    title: "Equipos y carga de gas",
-    text: "Inventario por instalación con refrigerante, kg cargados y tCO₂e equivalente según el art. 10 y el art. 15.3 del RD 1066/2026.",
-    mock: "equipos" as const,
+    title: "Ficha de equipo y fugas",
+    text: "Cada equipo con refrigerante, kg cargados, tCO₂e y historial de fugas registradas según el art. 15.1 del RD 1066/2026.",
+    slug: "02-ficha-equipo",
+    alt: "Ficha de equipo con datos de carga y registro de fugas",
   },
   {
-    title: "Registro de fugas",
-    text: "Anotación de fugas detectadas y reparadas con los datos exigidos en el art. 15.1 del RD 1066/2026.",
-    mock: "fugas" as const,
+    title: "Expediente del instalador",
+    text: "Ventas, intervenciones y evidencias del técnico en un expediente único por cliente (arts. 10 y 15.3).",
+    slug: "15-expediente-instalador",
+    alt: "Expediente de instalador con ventas e intervenciones",
+    imageOnRight: true,
   },
   {
-    title: "Ventas de gases fluorados",
-    text: "Trazabilidad de entregas y adquisiciones con exportación de suministros conforme a los arts. 10 y 15.3.",
-    mock: "ventas" as const,
+    title: "Ventas con verificación",
+    text: "Entregas y adquisiciones de gases fluorados con comprobación de datos antes de cerrar el movimiento (art. 15.3).",
+    slug: "04-venta-verificacion",
+    alt: "Registro de venta de gas con verificación de datos",
   },
   {
     title: "Certificados del personal",
-    text: "Control de cualificaciones y caducidad a siete años del art. 6.6 del RD 1066/2026.",
-    mock: "certificados" as const,
+    text: "Cualificaciones del personal, alertas de caducidad a siete años del art. 6.6 del RD 1066/2026.",
+    slug: "05-certificados",
+    alt: "Listado de certificados del personal con fechas de caducidad",
+    imageOnRight: true,
   },
   {
     title: "Informe Anexo V",
-    text: "Generación del informe del sistema equivalente digital previsto en el art. 11.2 y el Anexo V del RD 1066/2026.",
-    mock: "informe" as const,
+    text: "Informe del sistema equivalente digital previsto en el art. 11.2 y el Anexo V del RD 1066/2026.",
+    slug: "07-anexo-v",
+    alt: "Informe del sistema equivalente digital Anexo V",
   },
   {
-    title: "Cuadros de mando",
-    text: "Gráficos de tCO₂e por instalación, fugas por mes y certificados próximos a caducar (datos de ejemplo en la demo).",
-    mock: "dashboard" as const,
+    title: "Intervención en móvil",
+    text: "Registra una fuga o intervención desde el taller o la instalación, con los campos del art. 15.1.",
+    slug: "03-movil-intervencion",
+    alt: "Pantalla móvil de registro de intervención en fuga",
+    imageOnRight: true,
   },
-] as const;
+  {
+    title: "Stock de bombonas",
+    text: "Inventario de envases y gas disponible para venta o carga, alineado con trazabilidad del art. 15.3.",
+    slug: "11-botellas-stock",
+    alt: "Gestión de bombonas y stock de gases",
+  },
+  {
+    title: "Catálogo de formación",
+    text: "Cursos y contenidos para cumplir la formación exigida al personal (art. 6.6).",
+    slug: "13-formacion-catalogo",
+    alt: "Catálogo de cursos de formación",
+    imageOnRight: true,
+  },
+  {
+    title: "Seguimiento de formación",
+    text: "Progreso por técnico, caducidades y certificados de cursos completados.",
+    slug: "14-formacion-seguimiento",
+    alt: "Seguimiento de formación del personal",
+  },
+  {
+    title: "Portal del cliente",
+    text: "El titular consulta instalaciones, informes y estado de cumplimiento sin acceder a la operativa interna.",
+    slug: "09-portal-cliente",
+    alt: "Portal de cliente con resumen de instalaciones",
+    imageOnRight: true,
+  },
+  {
+    title: "Importación y conectores",
+    text: "Carga inicial desde hojas de cálculo o integraciones para no repetir altas manuales.",
+    slug: "16-importacion-conectores",
+    alt: "Asistente de importación y conectores de datos",
+  },
+  {
+    title: "Remisión al registro MITECO (prevista)",
+    text: "Pantalla preparada para cuando el MITECO habilite el registro nacional del art. 13 del RD 1066/2026 y la disposición transitoria 5.ª.",
+    slug: "06-registro-miteco",
+    alt: "Vista de registro MITECO en preparación",
+    imageOnRight: true,
+    futureNotice:
+      "El envío al registro del MITECO se activará solo cuando la Administración habilite la sección (art. 13 y DT 5.ª). Hoy FrigoTrace no realiza remisiones automáticas ni presenta esta vía como operativa.",
+  },
+];
 
-export const HOW_IT_WORKS = [
+export const HOW_IT_WORKS: {
+  step: string;
+  title: string;
+  text: string;
+  slug: ScreenSlug;
+  alt: string;
+  imageOnRight?: boolean;
+}[] = [
   {
     step: "1",
-    title: "Alta de instalaciones y equipos",
-    text: "Registra cada instalación frigorífica, sus equipos y la carga de gas con el factor GWP aplicable (art. 10 RD 1066/2026).",
-    mock: "equipos" as const,
+    title: "Panel de control",
+    text: "Visión global de equipos, tCO₂e, fugas y certificados próximos a caducar (datos de ejemplo).",
+    slug: "01-panel",
+    alt: "Panel principal de FrigoTrace",
   },
   {
     step: "2",
-    title: "Anota fugas y ventas",
-    text: "Captura fugas según el art. 15.1 y movimientos de gas según los arts. 10 y 15.3 sin duplicar papeles.",
-    mock: "fugas" as const,
+    title: "Preparación y revisión",
+    text: "Revisa incidencias y prepara inspecciones con listas de control y resúmenes por instalación.",
+    slug: "08-revision-preparacion",
+    alt: "Pantalla de revisión y preparación de inspección",
+    imageOnRight: true,
   },
   {
     step: "3",
-    title: "Informes listos para inspección",
-    text: "Consulta certificados (art. 6.6) y exporta el informe del sistema equivalente digital (art. 11.2 y Anexo V).",
-    mock: "informe" as const,
+    title: "Informe listo",
+    text: "Exporta el informe del sistema equivalente digital (art. 11.2 y Anexo V).",
+    slug: "07-anexo-v",
+    alt: "Informe Anexo V para inspección",
   },
-] as const;
+];
 
 export const AUDIENCES = [
   {
@@ -96,7 +169,7 @@ export const HOME_FAQ = [
   },
   {
     q: "¿Envía datos al registro del MITECO?",
-    a: "No. El art. 13 del RD 1066/2026 prevé la remisión al registro del MITECO cuando esté operativo; FrigoTrace no promete ni realiza envíos automáticos a ese registro mientras no esté disponible.",
+    a: "No. El art. 13 del RD 1066/2026 y la DT 5.ª prevén la remisión al registro del MITECO cuando esté operativo; FrigoTrace no promete ni realiza envíos automáticos a ese registro mientras no esté disponible.",
   },
   {
     q: "¿Puedo ver una demo?",
@@ -109,3 +182,5 @@ export const PRICING = {
   text: "Tarifas según número de instalaciones, usuarios y módulos (ventas, multi-empresa, informes). Pide condiciones o una demo desde el formulario.",
   cta: "Pedir condiciones",
 } as const;
+
+export const STATS_SCREEN: ScreenSlug = "01-panel";
