@@ -19,7 +19,7 @@ Documentadas sin valores en `.env.example`:
 | Variable | Uso |
 | --- | --- |
 | `APP_PUBLIC_URL` / `APP_DOMAIN` | URL canónica (SEO, sitemap, Open Graph) |
-| `CONTACT_EMAIL` | E-mail de contacto en pie y página de contacto |
+| `CONTACT_EMAIL` | E-mail de contacto (por defecto `frigotrace@davinchi.es`) |
 | `SEO_INDEXABLE` | `true` para indexación en producción |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics (banner de cookies si está definida) |
 | `GOOGLE_SITE_VERIFICATION` | Verificación Search Console |

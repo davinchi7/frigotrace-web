@@ -10,7 +10,7 @@ export const LEGAL_ENTITY = {
   address: "C/ San Agustín, 4, 1.º A — 28231 Las Rozas de Madrid (España)",
   offices: "C/ Castillo de Turégano, 3 — 28232 Las Rozas de Madrid (España)",
   phone: "+34 91 636 3980",
-  email: "info@frigotrace.es",
+  email: "frigotrace@davinchi.es",
   publicDomain: "www.frigotrace.es",
   registry:
     "Inscrita en el Registro Mercantil de Madrid, Tomo 21.107, Libro 0, Folio 27, Sección 8, Hoja M-374701, inscripción 1",

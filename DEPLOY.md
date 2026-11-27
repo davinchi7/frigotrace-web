@@ -9,6 +9,7 @@ Sitio estático/marketing sin base de datos. Alojamiento de la **aplicación** F
 
 ### Variables mínimas producción
 
+- `CONTACT_EMAIL=frigotrace@davinchi.es` (o omitir: mismo valor por defecto en `LEGAL_ENTITY`).
 - `APP_DOMAIN` o `APP_PUBLIC_URL` — dominio público del marketing.
 - `SEO_INDEXABLE=true` cuando el sitio deba indexarse.
 - `FORM_API_KEY` — obligatoria (cabecera `x-api-key` hacia ApiTools). Equivalente al secreto `FORM_API_KEY` de fitocloud-web.
