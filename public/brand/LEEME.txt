@@ -1,0 +1,9 @@
+FrigoTrace — paquete de marca v1.0 (27-11-2026) · DAVINCHI S.L.
+svg/         logos vectoriales (horizontal, símbolo, negro, blanco, icono de app circular y cuadrado)
+png/         los mismos en varios tamaños, fondo transparente (render resvg 4x -> LANCZOS)
+favicon/     favicon.svg, favicon.ico (16/32/48), PNG y apple-touch-icon 180 (versión simplificada)
+paleta/      paleta.css y paleta.json (colores + contrastes WCAG)
+tipografia/  Nunito 400/600/800 (SIL OFL 1.1)
+comparacion/ original generado vs SVG
+FrigoTrace-manual-de-marca.pdf  manual breve
+Nota: el nombre del logo está convertido a trazos (Nunito ~550); no hace falta instalar la fuente.

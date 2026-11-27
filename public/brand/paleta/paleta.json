@@ -1,0 +1,165 @@
+{
+ "colores": [
+  {
+   "nombre": "Turquesa FrigoTrace",
+   "hex": "#07A4A3",
+   "rgb": [
+    7,
+    164,
+    163
+   ],
+   "uso": "Logo, iconos, gráficos"
+  },
+  {
+   "nombre": "Turquesa botón",
+   "hex": "#0A7F85",
+   "rgb": [
+    10,
+    127,
+    133
+   ],
+   "uso": "Botones, enlaces, texto turquesa"
+  },
+  {
+   "nombre": "Turquesa profundo",
+   "hex": "#04606F",
+   "rgb": [
+    4,
+    96,
+    111
+   ],
+   "uso": "Hover, cabeceras, final del degradado"
+  },
+  {
+   "nombre": "Pizarra",
+   "hex": "#243E4A",
+   "rgb": [
+    36,
+    62,
+    74
+   ],
+   "uso": "Texto principal, «Frigo» del logo"
+  },
+  {
+   "nombre": "Fondo oscuro",
+   "hex": "#12343B",
+   "rgb": [
+    18,
+    52,
+    59
+   ],
+   "uso": "Modo oscuro, pies, versión en blanco"
+  },
+  {
+   "nombre": "Ámbar",
+   "hex": "#F8A112",
+   "rgb": [
+    248,
+    161,
+    18
+   ],
+   "uso": "Acento: alertas, nodo del logo, resaltados"
+  },
+  {
+   "nombre": "Hielo",
+   "hex": "#E8F6F6",
+   "rgb": [
+    232,
+    246,
+    246
+   ],
+   "uso": "Fondos suaves, tarjetas"
+  },
+  {
+   "nombre": "Blanco",
+   "hex": "#FFFFFF",
+   "rgb": [
+    255,
+    255,
+    255
+   ],
+   "uso": "Fondos"
+  }
+ ],
+ "contrastes": [
+  {
+   "texto": "#FFFFFF",
+   "fondo": "#0A7F85",
+   "descripcion": "Texto blanco sobre botón turquesa",
+   "ratio": 4.79
+  },
+  {
+   "texto": "#FFFFFF",
+   "fondo": "#04606F",
+   "descripcion": "Texto blanco sobre turquesa profundo",
+   "ratio": 7.22
+  },
+  {
+   "texto": "#FFFFFF",
+   "fondo": "#07A4A3",
+   "descripcion": "Texto blanco sobre turquesa del logo",
+   "ratio": 3.07
+  },
+  {
+   "texto": "#07A4A3",
+   "fondo": "#FFFFFF",
+   "descripcion": "Turquesa del logo sobre blanco",
+   "ratio": 3.07
+  },
+  {
+   "texto": "#0A7F85",
+   "fondo": "#FFFFFF",
+   "descripcion": "Enlace turquesa botón sobre blanco",
+   "ratio": 4.79
+  },
+  {
+   "texto": "#243E4A",
+   "fondo": "#FFFFFF",
+   "descripcion": "Pizarra sobre blanco (texto)",
+   "ratio": 11.27
+  },
+  {
+   "texto": "#243E4A",
+   "fondo": "#E8F6F6",
+   "descripcion": "Pizarra sobre hielo",
+   "ratio": 10.17
+  },
+  {
+   "texto": "#243E4A",
+   "fondo": "#F8A112",
+   "descripcion": "Pizarra sobre ámbar (botón de acento)",
+   "ratio": 5.42
+  },
+  {
+   "texto": "#FFFFFF",
+   "fondo": "#F8A112",
+   "descripcion": "Texto blanco sobre ámbar",
+   "ratio": 2.08
+  },
+  {
+   "texto": "#F8A112",
+   "fondo": "#FFFFFF",
+   "descripcion": "Ámbar sobre blanco",
+   "ratio": 2.08
+  },
+  {
+   "texto": "#FFFFFF",
+   "fondo": "#12343B",
+   "descripcion": "Blanco sobre fondo oscuro",
+   "ratio": 13.29
+  },
+  {
+   "texto": "#07A4A3",
+   "fondo": "#12343B",
+   "descripcion": "Turquesa del logo sobre fondo oscuro",
+   "ratio": 4.33
+  },
+  {
+   "texto": "#F8A112",
+   "fondo": "#12343B",
+   "descripcion": "Ámbar sobre fondo oscuro",
+   "ratio": 6.39
+  }
+ ],
+ "tipografia": "Nunito 400/600/800 (SIL OFL 1.1)"
+}

@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-ft-primary: #0a7f85;
+  --color-ft-primary-hover: #04606f;
+  --color-ft-accent: #f8a112;
+  --color-ft-ink: #243e4a;
+  --color-ft-ice: #e8f6f6;
+  --color-ft-dark: #12343b;
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-ft-ink antialiased;
+  }
+}
+
+.prose a {
+  color: var(--color-ft-primary);
+}
