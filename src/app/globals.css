@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+body.ft-cookie-banner-open {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 640px) {
+  body.ft-cookie-banner-open {
+    padding-bottom: 4.5rem;
+  }
+}
+
 @theme {
   --color-ft-primary: #0a7f85;
   --color-ft-primary-hover: #04606f;
