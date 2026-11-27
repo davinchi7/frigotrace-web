@@ -1,0 +1,11 @@
+# Producción: publicar el sitio marketing en el puerto 3300 (proxy en el host).
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:3300:3300"
+    env_file:
+      - .env
+    restart: unless-stopped

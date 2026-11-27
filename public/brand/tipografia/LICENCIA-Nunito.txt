@@ -1,0 +1,5 @@
+Nunito — © The Nunito Project Authors (https://github.com/googlefonts/nunito).
+Licencia SIL Open Font License 1.1 (OFL): uso libre, también comercial, incrustable en web/app/PDF.
+Texto completo: https://openfontlicense.org
+Descarga oficial: https://fonts.google.com/specimen/Nunito
+Estos TTF son instancias estáticas (400, 600, 800) generadas de la fuente variable oficial.

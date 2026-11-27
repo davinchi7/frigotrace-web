@@ -1,0 +1,13 @@
+:root{
+  --ft-turquesa-frigotrace: #07A4A3;
+  --ft-turquesa-botón: #0A7F85;
+  --ft-turquesa-profundo: #04606F;
+  --ft-pizarra: #243E4A;
+  --ft-fondo-oscuro: #12343B;
+  --ft-ambar: #F8A112;
+  --ft-hielo: #E8F6F6;
+  --ft-blanco: #FFFFFF;
+  --ft-boton-hover: #04606F;
+  --ft-font: "Nunito", system-ui, Arial, sans-serif;
+}
+/* Botón: fondo var(--ft-turquesa-boton), texto blanco (4,79:1). */
