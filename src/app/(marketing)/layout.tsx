@@ -3,6 +3,8 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { LEGAL_ENTITY, HOSTING_NOTE } from "@/lib/legal-entity";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
 import { CookiePreferencesLink } from "@/components/seo/CookiePreferencesLink";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd } from "@/lib/structured-data";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +13,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-white text-ft-ink overflow-x-hidden">
+      <JsonLd data={organizationJsonLd(footerEmail)} />
       <MarketingHeader />
       <main className="pb-16">{children}</main>
       <footer className="border-t border-slate-200 bg-ft-ice py-12 text-sm text-slate-600">
