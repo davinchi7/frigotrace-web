@@ -24,7 +24,7 @@ export async function actionContactForm(
     telefono: readString(formData, "telefono"),
     perfil: readString(formData, "perfil"),
     provincia: readString(formData, "provincia"),
-    explotaciones: readString(formData, "explotaciones"),
+    instalaciones: readString(formData, "instalaciones"),
     quienRecomendo: readString(formData, "quien-recomendo"),
     quienRecomendoDetalle: readString(formData, "quien-recomendo-detalle"),
     comentarios: readString(formData, "comentarios"),

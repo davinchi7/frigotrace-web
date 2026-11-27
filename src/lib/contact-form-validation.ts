@@ -11,7 +11,7 @@ export type ContactFormInput = {
   telefono: string;
   perfil: string;
   provincia: string;
-  explotaciones: string;
+  instalaciones: string;
   quienRecomendo: string;
   quienRecomendoDetalle: string;
   comentarios: string;
@@ -60,7 +60,7 @@ export function buildContactPayload(input: ContactFormInput, privacidadVersion: 
     telefono: input.telefono.trim(),
     perfil: input.perfil.trim(),
     provincia: input.provincia.trim(),
-    explotaciones: input.explotaciones.trim(),
+    instalaciones: input.instalaciones.trim(),
     quienTeLoRecomendo,
     comentarios: input.comentarios.trim(),
     aceptoPrivacidad: input.aceptoPrivacidad ? "Sí" : "No",

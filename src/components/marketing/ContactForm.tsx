@@ -205,9 +205,9 @@ export function ContactForm() {
         />
       </label>
 
-      <label htmlFor="explotaciones" className="block space-y-1.5 text-sm font-medium text-slate-800">
-        <span>Nº aproximado de explotaciones que gestionas</span>
-        <Input id="explotaciones" name="explotaciones" type="number" min={0} />
+      <label htmlFor="instalaciones" className="block space-y-1.5 text-sm font-medium text-slate-800">
+        <span>Nº aproximado de instalaciones o equipos que gestionas</span>
+        <Input id="instalaciones" name="instalaciones" type="number" min={0} />
       </label>
 
       <SelectField

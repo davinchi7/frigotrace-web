@@ -8,7 +8,7 @@ export function AvisoLegalContent() {
       <h2>1. Información legal</h2>
       <p>
         El sitio {e.publicDomain} es titularidad de {e.legalName} (NIF {e.nif}), con domicilio en {e.address}. El nombre
-        comercial FrigoTrace identifica el producto de trazabilidad de cadena de frío desarrollado por DAVINCHI.
+        comercial FrigoTrace identifica el software de libro de registro de gases fluorados desarrollado por DAVINCHI.
       </p>
       <p>
         El acceso a la Web implica la aceptación de este aviso legal y de las{" "}

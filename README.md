@@ -32,7 +32,7 @@ Documentadas sin valores en `.env.example`:
 
 Modelo: **[fitocloud-web](https://github.com/davinchi-finsi/fitocloud-web)** (`public/formulario-contacto.js`, `src/pages/contacto.astro`). En FitoCloud el secreto se llama `FORM_API_KEY` en GitHub Actions.
 
-El formulario **no** usa base de datos: `idDynaForm` + `dataForm` (JSON) vía server action.
+El formulario **no** usa base de datos: `idDynaForm` + `dataForm` (JSON) vía server action. En el POST a ApiTools se envían las cabeceras `Origin` y `Referer` con `APP_PUBLIC_URL` (p. ej. `https://frigotrace.es`). El campo opcional del formulario es `instalaciones` (nº de equipos/instalaciones), no «explotaciones».
 
 ## Marca
 

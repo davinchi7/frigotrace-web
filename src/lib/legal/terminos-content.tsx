@@ -6,14 +6,14 @@ export function TerminosContent() {
     <>
       <h2>1. Partes y objeto</h2>
       <p>
-        Contrato entre {e.legalName} y el cliente que contrata FrigoTrace para el registro y trazabilidad de la cadena de
-        frío. El alta en la aplicación se rige por el pedido comercial y estas condiciones generales.
+        Contrato entre {e.legalName} y el cliente que contrata FrigoTrace para el registro digital de gases fluorados. El
+        alta en la aplicación se rige por el pedido comercial y estas condiciones generales.
       </p>
 
       <h2>2. Servicio</h2>
       <p>
-        Software en modalidad SaaS para registro de temperaturas, alertas, usuarios y exportación de evidencias conforme a
-        las capacidades contratadas y al RD 1066/2026 en la medida de las funciones publicadas.
+        Software en modalidad SaaS para libro de registro, fugas, ventas, certificados e informes conforme a las
+        capacidades contratadas y al RD 1066/2026 en la medida de las funciones publicadas.
       </p>
 
       <h2>3. Cuenta y uso</h2>

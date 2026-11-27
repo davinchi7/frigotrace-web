@@ -22,11 +22,11 @@ const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 export const metadata: Metadata = {
   metadataBase: metadataBase(),
   title: {
-    default: `${LEGAL_ENTITY.productName} — Trazabilidad de cadena de frío`,
+    default: `${LEGAL_ENTITY.productName} — Gases fluorados RD 1066/2026`,
     template: `%s | ${LEGAL_ENTITY.productName}`,
   },
   description:
-    "Registro digital de temperaturas, alarmas y evidencias para operadores de la cadena de frío alimentaria. Cumplimiento del RD 1066/2026.",
+    "Libro de registro digital de equipos, fugas, ventas y certificados conforme al RD 1066/2026.",
   alternates: {
     canonical: siteUrl,
     languages: { "es-ES": siteUrl },

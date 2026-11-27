@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata = buildPublicMetadata({
   title: "Preguntas frecuentes",
-  description: "Respuestas sobre FrigoTrace, cadena de frío y RD 1066/2026.",
+  description: "Respuestas sobre FrigoTrace, gases fluorados y RD 1066/2026.",
   path: "preguntas-frecuentes",
 });
 
