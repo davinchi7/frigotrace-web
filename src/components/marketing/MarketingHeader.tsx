@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils";
 import { getAppUrl } from "@/lib/app-url";
 
 const NAV = [
-  { href: "/#solucion", label: "Solución" },
-  { href: "/formacion", label: "Formación" },
+  { href: "/#funcionalidades", label: "Funcionalidades" },
+  { href: "/#como-funciona", label: "Cómo funciona" },
   { href: "/preguntas-frecuentes", label: "FAQ" },
   { href: "/contacto", label: "Contacto" },
 ] as const;

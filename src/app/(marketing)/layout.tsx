@@ -21,7 +21,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
           <div>
             <BrandLogo href="/" />
             <p className="mt-3 max-w-xs leading-relaxed">
-              {LEGAL_ENTITY.tradeName} — trazabilidad y registro de la cadena de frío alimentaria (RD 1066/2026).
+              {LEGAL_ENTITY.tradeName} — libro de registro digital de gases fluorados (RD 1066/2026).
             </p>
             <p className="mt-2 max-w-xs text-xs text-slate-500">{LEGAL_ENTITY.legalName}</p>
             <p className="mt-3 max-w-sm text-xs text-slate-500 leading-relaxed">{HOSTING_NOTE}</p>

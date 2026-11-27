@@ -18,7 +18,7 @@ export const LEGAL_ENTITY = {
   dpoName: "DELYSER ABOGADOS, SLP",
   dpoEmail: "dpo@delyser.com",
   activity:
-    "Desarrollo y explotación de software y prestación de servicios tecnológicos; en particular, la plataforma FrigoTrace para el registro y la trazabilidad de la cadena de frío alimentaria conforme al RD 1066/2026 y normativa aplicable",
+    "Desarrollo y explotación de software y prestación de servicios tecnológicos; en particular, la plataforma FrigoTrace para el libro de registro digital de gases fluorados en instalaciones frigoríficas conforme al RD 1066/2026 y normativa aplicable",
 } as const;
 
 export const LEGAL_UPDATE_DATE = "27 de noviembre de 2026";
