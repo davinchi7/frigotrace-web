@@ -22,6 +22,8 @@ jobs:
         run: npm run lint
       - name: Typecheck
         run: npm run typecheck
+      - name: Validate use server exports
+        run: npm run check:server-actions
       - name: Build
         run: npm run build
         env:

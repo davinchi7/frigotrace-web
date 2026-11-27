@@ -2,13 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 body.ft-cookie-banner-open {
-  padding-bottom: 5.5rem;
-}
-
-@media (min-width: 640px) {
-  body.ft-cookie-banner-open {
-    padding-bottom: 4.5rem;
-  }
+  padding-bottom: var(--ft-cookie-banner-height, 5.5rem);
 }
 
 @theme {
