@@ -34,8 +34,14 @@ function applyDeniedConsent(): void {
   }
 }
 
-export function CookieConsentBanner({ measurementId }: { measurementId?: string }) {
-  const gaEnabled = Boolean(measurementId?.trim());
+export function CookieConsentBanner({
+  enabled,
+  measurementId,
+}: {
+  enabled: boolean;
+  measurementId?: string;
+}) {
+  const gaEnabled = enabled && Boolean(measurementId?.trim());
   const [bannerOpen, setBannerOpen] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
   const [consentLabel, setConsentLabel] = useState<"pendiente" | "aceptada" | "rechazada">("pendiente");

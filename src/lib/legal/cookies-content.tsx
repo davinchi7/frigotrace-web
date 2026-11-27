@@ -9,10 +9,15 @@ export function CookiesContent() {
       <h2>2. Cookies técnicas</h2>
       <p>Necesarias para la navegación y la seguridad. No requieren consentimiento.</p>
 
-      <h2>3. Cookies analíticas</h2>
+      <h2>3. Cookies analíticas (Google Analytics 4)</h2>
       <p>
-        Google Analytics (Google Ireland Ltd.) con IP anonimizada, solo si aceptas en el banner. Puedes cambiar tu
-        elección desde «Preferencias de cookies» en el pie de página.
+        Con tu consentimiento usamos <strong>Google Analytics 4</strong> (Google Ireland Limited) para medir visitas y
+        uso del sitio. La medición usa el identificador configurado en despliegue (por defecto{" "}
+        <code>G-WRTRB6X5TE</code>) y aplica <strong>Google Consent Mode v2</strong>: hasta que aceptes,{" "}
+        <code>analytics_storage</code> y <code>ad_storage</code> permanecen en <code>denied</code>; solo tras «Aceptar
+        analítica» pasan a <code>granted</code> para analítica (la publicidad sigue denegada). IP anonimizada cuando GA
+        está activo. Tu elección se guarda en el navegador y puedes cambiarla en «Preferencias de cookies» del pie de
+        página.
       </p>
 
       <h2>4. Más información</h2>

@@ -17,8 +17,12 @@ export function PrivacidadContent() {
           Legitimación: art. 6.1.b RGPD. Conservación: mientras dure la gestión y plazos legales.
         </li>
         <li>
-          <strong>Cookies y analítica:</strong> véase <Link href="/cookies">política de cookies</Link>. La analítica
-          requiere consentimiento.
+          <strong>Cookies y analítica (Google Analytics 4):</strong> véase{" "}
+          <Link href="/cookies">política de cookies</Link>. Google Ireland Limited puede tratar datos de uso (p. ej.
+          páginas visitadas, dispositivo) como encargado, solo si aceptas en el banner. Usamos Consent Mode v2; sin
+          consentimiento no se almacenan cookies de medición. El ID de medición GA4 se configura en despliegue
+          (variable <code>NEXT_PUBLIC_GA_ID</code>; valor por defecto en código{" "}
+          <code>G-WRTRB6X5TE</code>). En desarrollo y si el sitio no es indexable no se carga GA.
         </li>
         <li>
           <strong>Logs técnicos:</strong> interés legítimo en seguridad del sitio.
