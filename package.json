@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3300",
     "lint": "eslint src",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:server-actions": "node scripts/check-use-server-exports.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
