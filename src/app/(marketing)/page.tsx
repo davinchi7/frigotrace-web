@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { buildPublicMetadata } from "@/lib/seo";
 import { getAppUrl } from "@/lib/app-url";
-import { DemoRequestForm } from "@/components/marketing/DemoRequestForm";
 import { Button } from "@/components/ui/button";
 import { Thermometer, FileCheck, Bell, Truck } from "lucide-react";
 
@@ -62,9 +61,14 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
-          <div id="demo">
-            <h2 className="mb-3 text-lg font-semibold">Solicita información</h2>
-            <DemoRequestForm variant="onDark" />
+          <div id="demo" className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur">
+            <h2 className="text-lg font-semibold">Solicita información</h2>
+            <p className="mt-2 text-sm text-slate-100">
+              Completa el formulario de contacto y te respondemos con condiciones o una demo sin compromiso.
+            </p>
+            <Button asChild size="lg" variant="accent" className="mt-6 min-h-11 w-full">
+              <Link href="/contacto?motivo=demo">Ir al formulario</Link>
+            </Button>
           </div>
         </div>
       </section>

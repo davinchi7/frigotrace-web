@@ -1,40 +1,56 @@
 "use server";
 
+import { buildContactPayload, validateContactForm } from "@/lib/contact-form-validation";
 import { resolvePrivacyVersion, sendContactFormToToolsApi } from "@/lib/contact-form";
 
-export type DemoLeadState = { ok?: boolean; error?: string } | null;
+export type ContactFormState = { ok?: boolean; error?: string } | null;
 
-export async function actionDemoLead(_prev: DemoLeadState, formData: FormData): Promise<DemoLeadState> {
-  if (formData.get("website")?.toString().trim()) {
+function readString(formData: FormData, key: string): string {
+  return formData.get(key)?.toString().trim() ?? "";
+}
+
+export async function actionContactForm(
+  _prev: ContactFormState,
+  formData: FormData
+): Promise<ContactFormState> {
+  if (readString(formData, "web_url")) {
     return { ok: true };
   }
 
-  const name = formData.get("name")?.toString().trim();
-  const email = formData.get("email")?.toString().trim();
-  const terms = formData.get("terms") === "on";
+  const input = {
+    motivo: readString(formData, "motivo"),
+    nombre: readString(formData, "nombre"),
+    email: readString(formData, "email"),
+    telefono: readString(formData, "telefono"),
+    perfil: readString(formData, "perfil"),
+    provincia: readString(formData, "provincia"),
+    explotaciones: readString(formData, "explotaciones"),
+    quienRecomendo: readString(formData, "quien-recomendo"),
+    quienRecomendoDetalle: readString(formData, "quien-recomendo-detalle"),
+    comentarios: readString(formData, "comentarios"),
+    aceptoPrivacidad: formData.get("acepto-privacidad") === "on",
+    aceptoComunicaciones: formData.get("acepto-comunicaciones") === "on",
+  };
 
-  if (!terms) return { error: "Debe aceptar la política de privacidad" };
-  if (!name || !email) return { error: "Nombre y correo obligatorios" };
+  const validationError = validateContactForm(input);
+  if (validationError) {
+    return { error: validationError };
+  }
 
   try {
-    await sendContactFormToToolsApi({
-      nombre: name,
-      email,
-      telefono: formData.get("phone")?.toString().trim() || "",
-      empresa: formData.get("company")?.toString().trim() || "",
-      mensaje: formData.get("message")?.toString().trim() || "",
-      aceptoPrivacidad: true,
-      aceptoComunicaciones: formData.get("marketing") === "on",
-      privacidadVersion: resolvePrivacyVersion(),
-      consentimientoEn: new Date().toISOString(),
-      web_url: "",
-    });
+    await sendContactFormToToolsApi(buildContactPayload(input, resolvePrivacyVersion()));
     return { ok: true };
   } catch (err) {
     const message = err instanceof Error ? err.message : "";
     if (message === "CONTACT_FORM_NOT_CONFIGURED") {
       return { error: "El formulario no está configurado todavía. Inténtelo más tarde." };
     }
-    return { error: "No se pudo enviar la solicitud. Inténtelo de nuevo." };
+    if (message === "RATE_LIMIT") {
+      return {
+        error:
+          "Has realizado varios envíos seguidos. Espera unos minutos e inténtalo de nuevo, o escríbenos por correo.",
+      };
+    }
+    return { error: "Error al enviar el formulario. Por favor, inténtalo de nuevo." };
   }
 }
