@@ -28,6 +28,7 @@ Documentadas sin valores en `.env.example`:
 | `CONTACT_FORM_ID` | `idDynaForm` (FrigoTrace: **15**, por defecto en `.env.example`) |
 | `FORM_API_KEY` | Cabecera `x-api-key` (**obligatoria** en producción; sin valor en el repositorio) |
 | `PRIVACY_POLICY_VERSION` | `privacidadVersion` en cada envío |
+| `PORT` | Puerto en el **host** para Docker Compose (por defecto **3500**; contenedor interno 3300) |
 
 Modelo: **[fitocloud-web](https://github.com/davinchi-finsi/fitocloud-web)** (`public/formulario-contacto.js`, `src/pages/contacto.astro`). En FitoCloud el secreto se llama `FORM_API_KEY` en GitHub Actions.
 
@@ -39,7 +40,7 @@ Assets en `public/brand/` (Nunito, favicon, paleta en `paleta/paleta.json`). Col
 
 ## Despliegue
 
-Ver [DEPLOY.md](./DEPLOY.md). Producción con Docker en el puerto **3300** (`docker-compose.prod.yml`).
+Ver [DEPLOY.md](./DEPLOY.md). Producción con Docker: host **3500** → contenedor **3300** (`docker-compose.prod.yml`, variable `PORT`).
 
 ## CI
 

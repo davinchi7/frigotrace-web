@@ -1,11 +1,11 @@
-# Producción: publicar el sitio marketing en el puerto 3300 (proxy en el host).
+# Producción: el contenedor escucha en 3300; en el host se publica vía PORT (por defecto 3500).
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:3300:3300"
+      - "127.0.0.1:${PORT:-3500}:3300"
     env_file:
       - .env
     restart: unless-stopped

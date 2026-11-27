@@ -17,6 +17,7 @@ Sitio estático/marketing sin base de datos. Alojamiento de la **aplicación** F
 - Opcional: `CONTACT_FORM_API_URL` (por defecto `https://apitools.davinchi.es/api/Form/send-form`).
 - `PRIVACY_POLICY_VERSION` — coincide con la política publicada.
 - `NEXT_PUBLIC_APP_URL=https://app.frigotrace.es`
+- `PORT=3500` — puerto TCP en el host para Docker Compose (el contenedor sigue en **3300** dentro de la red del contenedor).
 
 No incluir secretos en el repositorio.
 
@@ -26,7 +27,7 @@ No incluir secretos en el repositorio.
 docker compose -f docker-compose.prod.yml up -d --build
 ```
 
-El contenedor escucha en `127.0.0.1:3300`. Coloca un proxy inverso (Caddy, nginx, etc.) hacia ese puerto.
+El sitio marketing queda en el host en `127.0.0.1:3500` (o el valor de `PORT` en `.env`). **Caddy:** `frigotrace.es` → `reverse_proxy 127.0.0.1:3500`. Reserva **3600** en el host para la futura app (`app.frigotrace.es`).
 
 ## Build manual
 
