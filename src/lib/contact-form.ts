@@ -61,6 +61,10 @@ export async function sendContactFormToToolsApi(payload: ContactFormApiPayload):
   }
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`CONTACT_FORM_HTTP_${res.status}${text ? `: ${text.slice(0, 200)}` : ""}`);
+    console.error("[contact-form] ApiTools respuesta no exitosa", {
+      status: res.status,
+      body: text.slice(0, 500),
+    });
+    throw new Error(`CONTACT_FORM_HTTP_${res.status}`);
   }
 }

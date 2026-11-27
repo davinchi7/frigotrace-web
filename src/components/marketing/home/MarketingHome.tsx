@@ -45,7 +45,7 @@ export function MarketingHome() {
                 variant="outline"
                 className="min-h-11 border-white/40 bg-white/10 text-white hover:bg-white/20"
               >
-                <a href={appUrl} rel="noopener noreferrer">
+                <a href={appUrl} target="_blank" rel="noopener noreferrer">
                   Acceder a la app
                 </a>
               </Button>

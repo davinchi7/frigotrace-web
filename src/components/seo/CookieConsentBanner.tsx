@@ -5,12 +5,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { readAnalyticsConsent, writeAnalyticsConsent } from "@/lib/analytics/consent";
 import { COOKIE_PREFS_OPEN_EVENT } from "@/lib/analytics/cookie-prefs-event";
+import { cn } from "@/lib/utils";
 
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
   }
 }
+
+const BANNER_BODY_CLASS = "ft-cookie-banner-open";
 
 function applyGrantedConsent(): void {
   if (typeof window.gtag === "function") {
@@ -79,54 +82,73 @@ export function CookieConsentBanner({
     return () => window.removeEventListener(COOKIE_PREFS_OPEN_EVENT, openPrefs);
   }, []);
 
+  useEffect(() => {
+    if (!bannerOpen) {
+      document.body.classList.remove(BANNER_BODY_CLASS);
+      return;
+    }
+    document.body.classList.add(BANNER_BODY_CLASS);
+    return () => document.body.classList.remove(BANNER_BODY_CLASS);
+  }, [bannerOpen]);
+
   if (!gaEnabled) return null;
 
   return (
     <>
       {bannerOpen ? (
         <div
-          className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-3 sm:px-4"
+          className="pointer-events-none fixed inset-x-0 bottom-0 z-30 px-2 pb-2 sm:z-40 sm:px-4 sm:pb-3"
           role="dialog"
           aria-labelledby="cookie-banner-title"
         >
-          <div className="pointer-events-auto w-full max-w-4xl rounded-lg border border-slate-200 bg-white p-3 shadow-lg sm:p-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="max-w-2xl text-sm text-slate-700">
-                <p id="cookie-banner-title" className="font-semibold text-slate-900">
-                  Cookies y medición
-                </p>
-                <p className="mt-1">
-                  Usamos cookies técnicas para el sitio. Con tu permiso, Google Analytics (Google Ireland Ltd.) mide el
-                  uso. Puedes aceptar, rechazar o cambiar tu elección después.{" "}
-                  <Link href="/cookies" className="text-[#0A7F85] underline">
-                    Más información
-                  </Link>
-                  .
-                </p>
-              </div>
-              <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-center">
+          <div
+            className={cn(
+              "pointer-events-auto mx-auto w-full max-w-4xl rounded-lg border border-slate-200 bg-white/98 shadow-lg backdrop-blur-sm",
+              "p-2.5 sm:p-4"
+            )}
+          >
+            <p id="cookie-banner-title" className="text-xs font-semibold text-slate-900 sm:text-sm">
+              Cookies y medición
+            </p>
+            <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-slate-600 sm:mt-1 sm:line-clamp-none sm:text-sm">
+              Cookies técnicas del sitio. Con tu permiso, Google Analytics mide el uso.{" "}
+              <Link href="/cookies" className="text-[#0A7F85] underline">
+                Más información
+              </Link>
+            </p>
+            <div className="mt-2 flex flex-row flex-wrap items-center gap-2">
+              <button
+                type="button"
+                className="text-[11px] font-medium text-[#0A7F85] underline sm:text-xs"
+                onClick={() => setPrefsOpen(true)}
+              >
+                Configurar
+              </button>
+              <div className="ml-auto flex flex-row gap-2">
                 <Button
                   type="button"
                   variant="outline"
-                  className="min-h-10"
+                  size="sm"
+                  className="h-8 min-h-8 px-2.5 text-xs sm:h-10 sm:min-h-10 sm:px-3 sm:text-sm"
                   onClick={() => {
                     writeAnalyticsConsent("denied");
                     applyDeniedConsent();
                     setBannerOpen(false);
                   }}
                 >
-                  Rechazar analítica
+                  Rechazar
                 </Button>
                 <Button
                   type="button"
-                  className="min-h-10"
+                  size="sm"
+                  className="h-8 min-h-8 px-2.5 text-xs sm:h-10 sm:min-h-10 sm:px-3 sm:text-sm"
                   onClick={() => {
                     writeAnalyticsConsent("granted");
                     applyGrantedConsent();
                     setBannerOpen(false);
                   }}
                 >
-                  Aceptar analítica
+                  Aceptar
                 </Button>
               </div>
             </div>

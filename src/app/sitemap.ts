@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl, isSeoIndexable, PUBLIC_PATHS } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
   if (!isSeoIndexable()) return [];

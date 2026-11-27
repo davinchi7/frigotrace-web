@@ -1,9 +1,12 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { actionContactForm, type ContactFormState } from "@/app/marketing-actions";
+import {
+  actionContactForm,
+  CONTACT_FORM_FALLBACK_EMAIL,
+  type ContactFormState,
+} from "@/app/marketing-actions";
 import {
   CONTACT_FIELD_LIMITS,
   CONTACT_MOTIVO_OPTIONS,
@@ -12,6 +15,7 @@ import {
   RECOMMENDATION_DETAIL,
   RECOMMENDATION_DETAIL_DEFAULT,
 } from "@/lib/contact-form-config";
+import type { ContactFormInput } from "@/lib/contact-form-validation";
 import { BasicDataProtectionTable } from "@/components/legal/BasicDataProtectionTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,9 +30,8 @@ type SelectFieldProps = {
   label: React.ReactNode;
   options: readonly string[];
   required?: boolean;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
 };
 
@@ -38,13 +41,10 @@ function SelectField({
   label,
   options,
   required,
-  defaultValue,
   value,
   onChange,
   placeholder = "Elige una opción",
 }: SelectFieldProps) {
-  const isControlled = value !== undefined;
-
   return (
     <label htmlFor={id} className="block space-y-1.5 text-sm font-medium text-slate-800">
       <span>{label}</span>
@@ -53,7 +53,8 @@ function SelectField({
         name={name}
         required={required}
         className={selectClassName}
-        {...(isControlled ? { value, onChange } : { defaultValue: defaultValue ?? "" })}
+        value={value}
+        onChange={onChange}
       >
         <option value="" disabled={required}>
           {placeholder}
@@ -68,37 +69,41 @@ function SelectField({
   );
 }
 
-function resolveMotivoFromSearch(motivoParam: string | null): string {
-  if (motivoParam === "demo") return "Ver una demo";
-  if (motivoParam === "otra") return "Otra consulta";
-  return CONTACT_MOTIVO_OPTIONS[0];
+function emptyDraft(motivoDefault: string): ContactFormInput {
+  return {
+    motivo: motivoDefault,
+    nombre: "",
+    email: "",
+    telefono: "",
+    perfil: "",
+    provincia: "",
+    instalaciones: "",
+    quienRecomendo: "",
+    quienRecomendoDetalle: "",
+    comentarios: "",
+    aceptoPrivacidad: false,
+    aceptoComunicaciones: false,
+  };
 }
 
-export function ContactForm() {
-  const searchParams = useSearchParams();
-  const motivoDefault = useMemo(
-    () => resolveMotivoFromSearch(searchParams.get("motivo")),
-  [searchParams]
-  );
+export function ContactForm({ motivoDefault }: { motivoDefault: string }) {
+  const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(actionContactForm, null);
+  const [draft, setDraft] = useState<ContactFormInput>(() => emptyDraft(motivoDefault));
 
-  const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(
-    actionContactForm,
-    null
-  );
-  const [quienRecomendo, setQuienRecomendo] = useState("");
-
-  const detalleCfg = RECOMMENDATION_DETAIL[quienRecomendo] ?? RECOMMENDATION_DETAIL_DEFAULT;
+  const detalleCfg = RECOMMENDATION_DETAIL[draft.quienRecomendo] ?? RECOMMENDATION_DETAIL_DEFAULT;
   const detalleLabel = detalleCfg.obligatorio
     ? `${detalleCfg.texto} *`
     : `${detalleCfg.texto} (opcional)`;
 
   useEffect(() => {
-    if (state?.ok) {
-      setQuienRecomendo("");
+    if (state && "values" in state && state.values) {
+      setDraft(state.values);
     }
-  }, [state?.ok]);
+  }, [state]);
 
-  if (state?.ok) {
+  const patch = (part: Partial<ContactFormInput>) => setDraft((d) => ({ ...d, ...part }));
+
+  if (state && "ok" in state && state.ok) {
     return (
       <div
         className="rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm"
@@ -107,11 +112,7 @@ export function ContactForm() {
       >
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0A7F85]/10 text-[#0A7F85]">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
+            <path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z" stroke="currentColor" strokeWidth="2" />
             <path
               d="M8 12l3 3 5-6"
               stroke="currentColor"
@@ -127,14 +128,31 @@ export function ContactForm() {
     );
   }
 
+  const errorState = state && "error" in state ? state : null;
+  const showSubmitError = errorState?.errorKind === "submit";
+  const mailto = CONTACT_FORM_FALLBACK_EMAIL;
+
   return (
     <form id="contact-form" action={formAction} className="space-y-5" noValidate>
       <p className="text-sm text-slate-600">Los campos con * son obligatorios.</p>
 
-      {state?.error ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800" role="alert">
-          {state.error}
-        </p>
+      {errorState ? (
+        <div
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+          role="alert"
+        >
+          {showSubmitError ? (
+            <p>
+              No hemos podido enviar tu mensaje. Escríbenos a{" "}
+              <a href={`mailto:${mailto}`} className="font-medium underline">
+                {mailto}
+              </a>
+              {errorState.error !== "submit_failed" ? ` (${errorState.error})` : "."}
+            </p>
+          ) : (
+            <p>{errorState.error}</p>
+          )}
+        </div>
       ) : null}
 
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
@@ -149,7 +167,8 @@ export function ContactForm() {
         name="motivo"
         label="Motivo de la consulta"
         options={CONTACT_MOTIVO_OPTIONS}
-        defaultValue={motivoDefault}
+        value={draft.motivo}
+        onChange={(e) => patch({ motivo: e.target.value })}
       />
 
       <label htmlFor="nombre" className="block space-y-1.5 text-sm font-medium text-slate-800">
@@ -161,6 +180,8 @@ export function ContactForm() {
           autoComplete="name"
           maxLength={CONTACT_FIELD_LIMITS.nombre}
           required
+          value={draft.nombre}
+          onChange={(e) => patch({ nombre: e.target.value })}
         />
       </label>
 
@@ -173,6 +194,8 @@ export function ContactForm() {
           autoComplete="email"
           maxLength={CONTACT_FIELD_LIMITS.email}
           required
+          value={draft.email}
+          onChange={(e) => patch({ email: e.target.value })}
         />
       </label>
 
@@ -184,6 +207,8 @@ export function ContactForm() {
           type="tel"
           autoComplete="tel"
           maxLength={CONTACT_FIELD_LIMITS.telefono}
+          value={draft.telefono}
+          onChange={(e) => patch({ telefono: e.target.value })}
         />
       </label>
 
@@ -193,6 +218,8 @@ export function ContactForm() {
         label="Perfil *"
         options={CONTACT_PERFIL_OPTIONS}
         required
+        value={draft.perfil}
+        onChange={(e) => patch({ perfil: e.target.value })}
       />
 
       <label htmlFor="provincia" className="block space-y-1.5 text-sm font-medium text-slate-800">
@@ -202,12 +229,21 @@ export function ContactForm() {
           name="provincia"
           type="text"
           maxLength={CONTACT_FIELD_LIMITS.provincia}
+          value={draft.provincia}
+          onChange={(e) => patch({ provincia: e.target.value })}
         />
       </label>
 
       <label htmlFor="instalaciones" className="block space-y-1.5 text-sm font-medium text-slate-800">
         <span>Nº aproximado de instalaciones o equipos que gestionas</span>
-        <Input id="instalaciones" name="instalaciones" type="number" min={0} />
+        <Input
+          id="instalaciones"
+          name="instalaciones"
+          type="number"
+          min={0}
+          value={draft.instalaciones}
+          onChange={(e) => patch({ instalaciones: e.target.value })}
+        />
       </label>
 
       <SelectField
@@ -216,8 +252,8 @@ export function ContactForm() {
         label="¿Quién te lo ha recomendado? *"
         options={CONTACT_QUIEN_RECOMENDO_OPTIONS}
         required
-        value={quienRecomendo}
-        onChange={(event) => setQuienRecomendo(event.target.value)}
+        value={draft.quienRecomendo}
+        onChange={(e) => patch({ quienRecomendo: e.target.value })}
       />
 
       <label
@@ -232,7 +268,8 @@ export function ContactForm() {
           maxLength={CONTACT_FIELD_LIMITS.quienRecomendoDetalle}
           placeholder={detalleCfg.placeholder}
           required={detalleCfg.obligatorio}
-          key={`${quienRecomendo}-${detalleCfg.texto}`}
+          value={draft.quienRecomendoDetalle}
+          onChange={(e) => patch({ quienRecomendoDetalle: e.target.value })}
         />
       </label>
 
@@ -243,6 +280,8 @@ export function ContactForm() {
           name="comentarios"
           rows={4}
           maxLength={CONTACT_FIELD_LIMITS.comentarios}
+          value={draft.comentarios}
+          onChange={(e) => patch({ comentarios: e.target.value })}
           className={cn(
             "flex min-h-[6rem] w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus-visible:ring-2 focus-visible:ring-[#0A7F85]"
           )}
@@ -258,6 +297,8 @@ export function ContactForm() {
           id="acepto-privacidad"
           name="acepto-privacidad"
           required
+          checked={draft.aceptoPrivacidad}
+          onChange={(e) => patch({ aceptoPrivacidad: e.target.checked })}
           className="mt-1 h-4 w-4 rounded border-slate-300 text-[#0A7F85] focus:ring-[#0A7F85]"
         />
         <span>
@@ -278,6 +319,8 @@ export function ContactForm() {
           type="checkbox"
           id="acepto-comunicaciones"
           name="acepto-comunicaciones"
+          checked={draft.aceptoComunicaciones}
+          onChange={(e) => patch({ aceptoComunicaciones: e.target.checked })}
           className="mt-1 h-4 w-4 rounded border-slate-300 text-[#0A7F85] focus:ring-[#0A7F85]"
         />
         <span>(Voluntaria) Quiero recibir por correo electrónico novedades sobre FrigoTrace.</span>
