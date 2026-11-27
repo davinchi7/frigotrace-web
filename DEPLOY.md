@@ -11,7 +11,8 @@ Sitio estático/marketing sin base de datos. Alojamiento de la **aplicación** F
 
 - `CONTACT_EMAIL=frigotrace@davinchi.es` (o omitir: mismo valor por defecto en `LEGAL_ENTITY`).
 - `APP_DOMAIN` o `APP_PUBLIC_URL` — dominio público del marketing.
-- `SEO_INDEXABLE=true` cuando el sitio deba indexarse.
+- `SEO_INDEXABLE=true` cuando el sitio deba indexarse (necesario para cargar GA4).
+- `NEXT_PUBLIC_GA_ID=G-WRTRB6X5TE` (opcional: default en código). GA4 no se carga en `next dev` ni sin `SEO_INDEXABLE=true`.
 - `FORM_API_KEY` — obligatoria (cabecera `x-api-key` hacia ApiTools). Equivalente al secreto `FORM_API_KEY` de fitocloud-web.
 - `CONTACT_FORM_ID=15` — identificador del formulario dinámico en ApiTools (puede omitirse si se usa el valor por defecto).
 - Opcional: `CONTACT_FORM_API_URL` (por defecto `https://apitools.davinchi.es/api/Form/send-form`).

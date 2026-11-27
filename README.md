@@ -21,7 +21,7 @@ Documentadas sin valores en `.env.example`:
 | `APP_PUBLIC_URL` / `APP_DOMAIN` | URL canónica (SEO, sitemap, Open Graph) |
 | `CONTACT_EMAIL` | E-mail de contacto (por defecto `frigotrace@davinchi.es`) |
 | `SEO_INDEXABLE` | `true` para indexación en producción |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics (banner de cookies si está definida) |
+| `NEXT_PUBLIC_GA_ID` | GA4 (default `G-WRTRB6X5TE`; solo si `SEO_INDEXABLE=true` y no en `next dev`) |
 | `GOOGLE_SITE_VERIFICATION` | Verificación Search Console |
 | `NEXT_PUBLIC_APP_URL` | Enlace «Acceder a la app» |
 | `CONTACT_FORM_API_URL` | API Davinchi Tools (`POST /api/Form/send-form`) |

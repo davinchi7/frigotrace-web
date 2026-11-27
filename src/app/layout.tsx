@@ -4,6 +4,7 @@ import "./globals.css";
 import { LEGAL_ENTITY } from "@/lib/legal-entity";
 import { getSiteUrl, isSeoIndexable, metadataBase } from "@/lib/seo";
 import { CookieConsentBanner } from "@/components/seo/CookieConsentBanner";
+import { gaRuntimeConfig } from "@/lib/analytics/ga-config";
 import { GoogleAnalytics, GoogleConsentDefaults } from "@/components/seo/GoogleAnalytics";
 
 const nunito = localFont({
@@ -17,7 +18,7 @@ const nunito = localFont({
 });
 
 const siteUrl = getSiteUrl();
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+const { enabled: gaEnabled, measurementId } = gaRuntimeConfig();
 
 export const metadata: Metadata = {
   metadataBase: metadataBase(),
@@ -53,13 +54,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" dir="ltr">
       <head>
-        <GoogleConsentDefaults measurementId={measurementId} />
+        {gaEnabled ? <GoogleConsentDefaults /> : null}
         <link rel="alternate" hrefLang="es-ES" href={siteUrl} />
       </head>
       <body className={`${nunito.variable} font-sans`}>
         {children}
-        <GoogleAnalytics measurementId={measurementId} />
-        <CookieConsentBanner measurementId={measurementId} />
+        {gaEnabled ? <GoogleAnalytics measurementId={measurementId} /> : null}
+        <CookieConsentBanner enabled={gaEnabled} measurementId={measurementId} />
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 import Script from "next/script";
 
-export function GoogleConsentDefaults({ measurementId }: { measurementId?: string }) {
-  if (!measurementId?.trim()) return null;
+export function GoogleConsentDefaults() {
   return (
     <script
       id="ft-ga-consent-defaults"
